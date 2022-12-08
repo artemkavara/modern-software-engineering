@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ToString
 public class Transaction {
-    private String message;
+  private String message;
 
-    public void setMessage(String sender, int height){
-        this.message = String.format("%s sent %d coins to Alice", sender, height);
-        log.info("Work with transaction "+message+" begin");
-    }
+  public void setMessage(String sender, int height) {
+    this.message = String.format("%s sent %d coins to Alice", sender, height);
+    log.info("Work with transaction " + message + " begin");
+  }
 }

@@ -16,6 +16,7 @@
         <codec.version>1.15</codec.version>
         <logger.version>1.7.36</logger.version>
         <jackson.databind.version>2.13.3</jackson.databind.version>
+        <fmt.version>2.18</fmt.version>
     </properties>
 
     <dependencies>
@@ -45,5 +46,21 @@
             <version>${jackson.databind.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify.fmt</groupId>
+                <artifactId>fmt-maven-plugin</artifactId>
+                <version>${fmt.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -10,19 +10,17 @@ import org.apache.commons.codec.digest.DigestUtils;
 @Slf4j
 @ToString
 public class Block {
-    private final int height;
-    private final int blockSize;
-    private final BlockHeader blockHeader;
-    private final int txCount;
-    private final Transaction txs;
+  private final int height;
+  private final int blockSize;
+  private final BlockHeader blockHeader;
+  private final int txCount;
+  private final Transaction txs;
 
-    public void calculateMerkleRoot(){
-        this.blockHeader.setMerkleRoot(DigestUtils.sha256Hex(txs.getMessage()));
-    }
+  public void calculateMerkleRoot() {
+    this.blockHeader.setMerkleRoot(DigestUtils.sha256Hex(txs.getMessage()));
+  }
 
-    public void setBlockHash(String blockHash){
-        this.blockHeader.setBlockHash(blockHash);
-    }
-
+  public void setBlockHash(String blockHash) {
+    this.blockHeader.setBlockHash(blockHash);
+  }
 }
-
