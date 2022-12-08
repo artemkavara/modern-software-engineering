@@ -1,7 +1,5 @@
 package blockchain;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
 import java.util.LinkedList;
 import lombok.Getter;
@@ -22,25 +20,6 @@ public class Blockchain {
 
     Block genesisBlock = createBlock(0, "0");
     chain.add(genesisBlock);
-  }
-
-  public static void main(String[] args) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    Blockchain blockchain = new Blockchain();
-    blockchain.addBlock(
-        blockchain.getChain().getLast().getHeight() + 1,
-        blockchain.getChain().getLast().getBlockHeader().getBlockHash());
-    blockchain
-        .getChain()
-        .forEach(
-            b -> {
-              try {
-                System.out.println(
-                    objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(b));
-              } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-              }
-            });
   }
 
   private Block createBlock(int blockHeight, String prevBlockHash) {
