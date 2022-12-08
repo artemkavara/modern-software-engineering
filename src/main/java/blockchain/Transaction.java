@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Transaction {
   private String message;
 
+  /** Utility method for setting the message in the transaction. */
   public void setMessage(String sender, int height) {
     this.message = String.format("%s sent %d coins to Alice", sender, height);
     log.info("Work with transaction " + message + " begin");

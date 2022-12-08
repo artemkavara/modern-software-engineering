@@ -23,6 +23,14 @@ public class BlockHeader {
   private int nonce;
   private String blockHash;
 
+  /**
+   * Utility method to convert the hexadecimal number from big ending notation to little ending
+   * notation. Example: given the hexadecimal number 1F2A34 in big ending notation. Then the same
+   * number represented in the little ending notation is 342A1F.
+   *
+   * @param hexNumber hexadecimal number for transformation.
+   * @return hexadecimal number in little ending notation.
+   */
   private static String convertHexToLittleEnding(String hexNumber) {
     if (hexNumber.length() % 2 != 0) {
       hexNumber = "0" + hexNumber;
@@ -35,14 +43,35 @@ public class BlockHeader {
     return String.join("", hexNumberList);
   }
 
+  /**
+   * Utility method to convert an integer decimal number to hexadecimal number.
+   *
+   * @param decNumber int for transformation.
+   * @return hexadecimal number in little ending notation.
+   */
   private static String convertIntToHexLittleEnding(int decNumber) {
     return convertHexToLittleEnding(Integer.toHexString(decNumber));
   }
 
+  /**
+   * Utility method to convert a long decimal number to hexadecimal number.
+   *
+   * @param decNumber long for transformation.
+   * @return hexadecimal number in little ending notation.
+   */
   private static String convertLongToHexLittleEnding(long decNumber) {
     return convertHexToLittleEnding(Long.toHexString(decNumber));
   }
 
+  /**
+   * Utility method to calculate the difficulty of mining. Given difficulty bits in hexadecimal
+   * form. The first 2 digits represent the exponent, the latter represent the coefficient. The
+   * target is calculated by formula coef*2^(8*(exp-3)) and then the target is converted to
+   * hexadecimal number again. After that the number of zeros before the first significant digit is
+   * calculated.
+   *
+   * @return the difficulty of the mining algorithm.
+   */
   private int calcDifficulty() {
     int exponent = Integer.parseInt(difficultyBits.substring(0, 2), 16);
     long coefficient = Long.parseLong(difficultyBits.substring(2), 16);
@@ -55,6 +84,11 @@ public class BlockHeader {
     return 64 - targetHex.length();
   }
 
+  /**
+   * Utility method for creating a string for mining.
+   *
+   * @return concatenated string ready for SHA256 encoding.
+   */
   private String concatenateString() {
     return convertIntToHexLittleEnding(version)
         + convertHexToLittleEnding(prevBlockHash)
@@ -64,6 +98,12 @@ public class BlockHeader {
         + convertIntToHexLittleEnding(nonce);
   }
 
+  /**
+   * Main method for mining the block hash. The process is repeated until the hash satisfies the
+   * difficulty condition.
+   *
+   * @return hash for block after the mining is successful.
+   */
   public String mine() {
     int difficulty = this.calcDifficulty();
     log.info("Nonce version: " + this.nonce + ", difficulty: " + difficulty);

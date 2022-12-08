@@ -16,10 +16,16 @@ public class Block {
   private final int txCount;
   private final Transaction txs;
 
+  /**
+   * Method to calculate hash of merkle tree. In this version of blockchain architecture, only 1
+   * transaction/block is possible, so the merkle tree hash is basically the hash of the transaction
+   * message.
+   */
   public void calculateMerkleRoot() {
     this.blockHeader.setMerkleRoot(DigestUtils.sha256Hex(txs.getMessage()));
   }
 
+  /** Method that sets the value of block hash calculated after the mining. */
   public void setBlockHash(String blockHash) {
     this.blockHeader.setBlockHash(blockHash);
   }

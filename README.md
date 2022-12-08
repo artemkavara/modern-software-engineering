@@ -7,7 +7,7 @@ Solutions to lab problems during the Master's degree course of Modern Software T
 * Java 11+
 * Maven
 
-Besides, it is recommended to run Blockchain.java with JVM option `-Xss=32m` to avoid StackOverflowError during runtime 
+Besides, it is recommended to run Blockchain.java with JVM option `-Xss32m` to avoid StackOverflowError during runtime 
 because of complicated and resource-consuming computations.
 
 Another possible fix to StackOverflowError is disabling logging (just comment the lines that start with `log.info(...)`)

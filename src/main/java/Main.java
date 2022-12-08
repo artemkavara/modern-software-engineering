@@ -7,18 +7,18 @@ public class Main {
     ObjectMapper objectMapper = new ObjectMapper();
     Blockchain blockchain = new Blockchain();
     blockchain.addBlock(
-            blockchain.getChain().getLast().getHeight() + 1,
-            blockchain.getChain().getLast().getBlockHeader().getBlockHash());
+        blockchain.getChain().getLast().getHeight() + 1,
+        blockchain.getChain().getLast().getBlockHeader().getBlockHash());
     blockchain
-            .getChain()
-            .forEach(
-                    b -> {
-                      try {
-                        System.out.println(
-                                objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(b));
-                      } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                      }
-                    });
+        .getChain()
+        .forEach(
+            b -> {
+              try {
+                System.out.println(
+                    objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(b));
+              } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+              }
+            });
   }
 }

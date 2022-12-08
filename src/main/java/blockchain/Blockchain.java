@@ -22,7 +22,15 @@ public class Blockchain {
     chain.add(genesisBlock);
   }
 
+  /**
+   * Utility method for creating a block.
+   *
+   * @param blockHeight the height of a block.
+   * @param prevBlockHash the hash of a previous block.
+   * @return block.
+   */
   private Block createBlock(int blockHeight, String prevBlockHash) {
+
     BlockHeader blockHeader =
         BlockHeader.builder()
             .withVersion(1)
@@ -48,7 +56,17 @@ public class Blockchain {
     return block;
   }
 
+  /**
+   * Method for adding the block to the blockchain
+   *
+   * @param blockHeight the height of a block.
+   * @param prevBlockHash the hash of a previous block.
+   */
   public void addBlock(int blockHeight, String prevBlockHash) {
+    String realPreviousHash = chain.getLast().getBlockHeader().getBlockHash();
+    if (!realPreviousHash.equals(prevBlockHash)) {
+      throw new IllegalArgumentException("The block is altered!");
+    }
     this.chain.add(createBlock(blockHeight, prevBlockHash));
   }
 }
